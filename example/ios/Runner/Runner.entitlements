@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:starflash.starlets.com.cn</string>
+		<string>applinks:ssg.wisesystem.com.cn</string>
+		<string>applinks:mall.starlets.com.cn</string>
+	</array>
+</dict>
+</plist>

@@ -10,7 +10,7 @@ class PayPage extends StatefulWidget {
 }
 
 class _PayPageState extends State<PayPage> {
-  String _url = "https://wxpay.wxutil.com/pub_v2/app/app_pay.php";
+  String _url = "http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php";
 
   String _result = "无";
 

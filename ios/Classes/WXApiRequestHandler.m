@@ -2,12 +2,12 @@
 // Created by mo on 2020/3/7.
 //
 
-#import <WechatOpenSDK/WXApi.h>
+#import <WXApi.h>
 #import "WXApiRequestHandler.h"
 #import "SendMessageToWXReq+requestWithTextOrMediaMessage.h"
 #import "WXMediaMessage+messageConstruct.h"
 #import "FluwxStringUtil.h"
-#import <WechatOpenSDK/WXApiObject.h>
+#import <WXApiObject.h>
 
 @implementation WXApiRequestHandler
 
@@ -398,6 +398,16 @@
 
 
     [WXApi sendReq:req completion:completion];
+}
+
++ (void)openCustomerService:(NSString *)corpId
+                        url:(NSString *)url
+                                 completion:(void (^ __nullable)(BOOL success))completion {
+    WXOpenCustomerServiceReq *req = [[WXOpenCustomerServiceReq alloc] init];
+    req.corpid = corpId;    //企业ID
+    req.url = url;            //客服URL
+    
+    return [WXApi sendReq:req completion:completion];
 }
 
 @end

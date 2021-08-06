@@ -20,7 +20,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:fluwx/fluwx.dart';
 import 'package:fluwx/src/wechat_enums.dart';
@@ -257,4 +256,10 @@ Future<bool> authWeChatByPhoneLogin(
     {required String scope, String state = "state"}) async {
   return await _channel
       .invokeMethod("authByPhoneLogin", {"scope": scope, "state": state});
+}
+
+Future<bool> openCustomerService(
+    {required String corpId, required String url}) async {
+  return await _channel
+      .invokeMethod("openCustomerService", {"corpId": corpId, "url": url});
 }

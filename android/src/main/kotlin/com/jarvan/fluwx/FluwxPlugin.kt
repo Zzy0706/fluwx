@@ -4,9 +4,11 @@ import android.content.Intent
 import android.util.Log
 import androidx.annotation.NonNull
 import com.jarvan.fluwx.handlers.*
+import com.tencent.mm.opensdk.constants.Build
 import com.tencent.mm.opensdk.modelbiz.SubscribeMessage
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram
 import com.tencent.mm.opensdk.modelbiz.WXOpenBusinessWebview
+import com.tencent.mm.opensdk.modelbiz.WXOpenCustomerServiceChat
 import com.tencent.mm.opensdk.modelpay.PayReq
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -16,6 +18,12 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
+
+import com.tencent.mm.opensdk.openapi.IWXAPI
+
+
+
 
 /** FluwxPlugin */
 class FluwxPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,PluginRegistry.NewIntentListener {
@@ -79,6 +87,7 @@ class FluwxPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,PluginRegist
             call.method.startsWith("share") -> shareHandler?.share(call, result)
             call.method == "isWeChatInstalled" -> WXAPiHandler.checkWeChatInstallation(result)
             call.method == "getExtMsg" -> getExtMsg(result)
+            call.method == "openCustomerService" -> openCustomerService(call,result)
             else -> result.notImplemented()
         }
     }
@@ -206,6 +215,17 @@ class FluwxPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,PluginRegist
     }
 
     private fun openWXApp(result: MethodChannel.Result) = result.success(WXAPiHandler.wxApi?.openWXApp())
+
+    private fun openCustomerService(call: MethodCall, result: MethodChannel.Result) {
+        if (WXAPiHandler.wxApi?.wxAppSupportAPI!! > Build.SUPPORT_OPEN_CUSTOMER_SERVICE_CHAT){
+            val req = WXOpenCustomerServiceChat.Req()
+            req.corpId = call.argument<String?>("corpId")
+            req.url = call.argument<String?>("url")
+            result.success(WXAPiHandler.wxApi?.sendReq(req))
+            return
+        }
+        result.error("-1","微信版本过低","微信版本过低")
+    }
 
     override fun onNewIntent(intent: Intent?): Boolean {
         handelIntent(intent)

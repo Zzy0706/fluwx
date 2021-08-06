@@ -37,10 +37,13 @@ class _SendAuthPageState extends State<SendAuthPage> {
         children: <Widget>[
           OutlineButton(
             onPressed: () {
-              fluwx
-                  .sendWeChatAuth(
-                      scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
-                  .then((data) {});
+              fluwx.openCustomerService(
+                  corpId: 'ww833681f3c790a9c3',
+                  url: 'https://work.weixin.qq.com/kfid/kfc9eb46d7ed97202dc');
+              // fluwx
+              //     .sendWeChatAuth(
+              //         scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
+              //     .then((data) {});
             },
             child: const Text("send auth"),
           ),

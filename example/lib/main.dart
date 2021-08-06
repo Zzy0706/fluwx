@@ -32,10 +32,10 @@ class _MyAppState extends State<MyApp> {
 
   _initFluwx() async {
     await registerWxApi(
-        appId: "wxd930ea5d5a258f4f",
+        appId: "wx6087920dd0b286ae",
         doOnAndroid: true,
         doOnIOS: true,
-        universalLink: "https://your.univerallink.com/link/");
+        universalLink: "https://starflash.starlets.com.cn/");
     var result = await isWeChatInstalled;
     print("is installed $result");
   }

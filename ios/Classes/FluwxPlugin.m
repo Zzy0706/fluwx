@@ -74,6 +74,8 @@ FlutterMethodChannel *channel = nil;
         [self handelGetExtMsgWithCall:call result:result];
     } else if ([call.method hasPrefix:@"share"]) {
         [_fluwxShareHandler handleShare:call result:result];
+    } else if([@"openCustomerService" isEqualToString:call.method]){
+        [self handleOpenCustomerService:call result:result ];
     } else {
         result(FlutterMethodNotImplemented);
     }
@@ -231,4 +233,11 @@ FlutterMethodChannel *channel = nil;
     self.extMsg = request.message.messageExt;
 }
 
+- (void)handleOpenCustomerService:(FlutterMethodCall *)call result:(FlutterResult)result {
+    NSString *corpId = call.arguments[@"corpId"];
+    NSString *url = call.arguments[@"url"];
+    [WXApiRequestHandler openCustomerService:corpId url:url completion:^(BOOL done) {
+        result(@(done));
+    }];
+}
 @end

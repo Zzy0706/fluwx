@@ -4,7 +4,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import <WechatOpenSDK/WXApiObject.h>
+#import <WXApiObject.h>
 #import "FluwxResponseHandler.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -144,6 +144,10 @@ NS_ASSUME_NONNULL_BEGIN
             Package:(NSString *)package
                Sign:(NSString *)sign
          completion:(void (^ __nullable)(BOOL success))completion;
+
++ (void)openCustomerService:(NSString *)corpId
+                        url:(NSString *)url
+                 completion:(void (^ __nullable)(BOOL success))completion;
 @end
 
 NS_ASSUME_NONNULL_END
